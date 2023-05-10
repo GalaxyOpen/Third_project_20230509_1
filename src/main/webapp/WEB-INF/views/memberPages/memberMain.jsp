@@ -8,7 +8,7 @@
     ${sessionScope.loginEmail} 님 환영해요!
 
     <button onclick="update()">개인정보 관리하기</button>
-
+    <a href="/member/logout">로그아웃</a>
 
 </div>
 </body>
@@ -17,4 +17,6 @@
         location.href="/update";
     }
 </script>
+
+
 </html>

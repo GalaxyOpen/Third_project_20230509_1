@@ -7,10 +7,9 @@
 <body>
 
 <div id="section">
-    <a href="/save">회원가입</a>
-    <a href="/boardPages/memberLogin">로그인</a>
-    <a href="/boardPages/boardList">글목록</a>
-
+    <a href="/member/save">회원가입</a>
+    <a href="/member/login">로그인</a>
+    <a href="/board/list">글목록</a>
 </div>
 
 </body>

@@ -1,21 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <html>
 <head>
     <title>Title</title>
+
 </head>
 <body>
 <div id="section">
-    <form action="/save" method="post">
+    <form action="/member/save" method="post" enctype="multipart/form-data">
        Email: <input type="text" id="memberEmail" name="memberEmail" onblur="email_duplicate_check()" placeholder="아이디를 입력해주세요">
         <p id="email-area"></p>
-        <p2 id="email-area2"></p2>
        Password: <input type="text" id="memberPassword" name="memberPassword" onblur="password_check()" placeholder="비밀번호를 입력해주세요">
         <p id="password-area"></p>
         Name: <input type="text" id="memberName" name="memberName" placeholder="이름을 입력해주세요">
         <p id="name-area"></p>
         Phone number : <input type="text" id="memberMobile" name="memberMobile" placeholder="010-xxxx-xxxx">
         <p id="mobile-area"></p>
-        <input type="file" id="memberProfile" name="memberProfile" multiple>
+        Photo : <input type="file" id="memberProfile" name="memberProfile" multiple>
         <input type="submit" value="회원가입">
     </form>
 </div>
@@ -38,29 +39,21 @@
         //     }
         // }
         const email_duplicate_check =()=>{
-            let typingEmail = document.getElementById("memberEmail").value;
-            const emailcheck = document.getElementById("email-area2");
-            const email_du_check={
-              "memberEmail": typingEmail
-            };
+            const typingEmail = document.getElementById("memberEmail").value;
+            const email_check = document.getElementById("email-area");
             $.ajax({
                 type: "post",
-                url: "/save",
+                url: "/email_check",
                 data: {
-                    "email-check":typingEmail
+                    "memberEmail":typingEmail
                 },
-                success: function(result){
-                    if(typingEmail.length ==0){
-                        emailcheck.innerHTML="필수 입력입니다.";
-                        emailcheck.style.color="red";
-                    }else{
-                        emailcheck.innerHTML="사용가능한 이메일입니다.";
-                        emailcheck.style.color="green";
-                    }
+                success: function(){
+                        email_check.innerHTML="사용가능한 이메일 주소입니다.";
+                        email_check.style.color="green";
                 },
                 error :function(){
-                    emailcheck.innerHTML="이미 사용중인 이메일입니다.";
-                    emailcheck.style.color="red";
+                    email_check.innerHTML="중복되었거나 올바르지 않은 이메일 주소입니다.";
+                    email_check.style.color="red";
                 }
             })
         }
