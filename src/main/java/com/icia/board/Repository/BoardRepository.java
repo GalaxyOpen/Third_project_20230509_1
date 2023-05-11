@@ -1,6 +1,7 @@
 package com.icia.board.Repository;
 
 import com.icia.board.DTO.BoardDTO;
+import com.icia.board.DTO.BoardFileDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,38 @@ public class BoardRepository {
 
     public int boardSearchCount(Map<String, Object> pagingParams) {
         return sql.selectOne("Board.searchCount", pagingParams);
+    }
+
+    public BoardDTO save(BoardDTO boardDTO) {
+        sql.insert("Board.save", boardDTO);
+        return boardDTO;
+    }
+
+    public void saveFile(BoardFileDTO boardFileDTO) {
+        sql.insert("Board.saveFile", boardFileDTO);
+    }
+
+    public void updateHits(Long id) {
+        sql.update("Board.updateHits",id);
+    }
+
+    public BoardDTO findById(Long id) {
+        return sql.selectOne("Board.findById", id);
+    }
+
+    public List<BoardFileDTO> findFile(Long boardId) {
+        return sql.selectList("Board.findFile", boardId);
+    }
+
+    public List<BoardDTO> findAll() {
+        return sql.selectList("Board.findAll");
+    }
+
+    public void delete(Long id) {
+        sql.delete("Board.delete",id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        sql.update("board.update",boardDTO);
     }
 }

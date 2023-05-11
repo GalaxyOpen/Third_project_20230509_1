@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 public class CommentDTO {
     public Long id;
-    public String boardId;
+    public Long boardId;
     public String commentWriter;
     public Timestamp commentCreatedDate;
 }

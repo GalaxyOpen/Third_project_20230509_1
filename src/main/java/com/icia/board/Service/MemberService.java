@@ -75,4 +75,8 @@ public class MemberService {
             return false;
         }
     }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.update(memberDTO);
+    }
 }

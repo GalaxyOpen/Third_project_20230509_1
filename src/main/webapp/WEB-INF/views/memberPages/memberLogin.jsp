@@ -11,5 +11,6 @@
         <input type="submit" value="로그인">
         </form>
     </div>
+    <a href="/">처음으로 돌아가기</a>
 </body>
 </html>

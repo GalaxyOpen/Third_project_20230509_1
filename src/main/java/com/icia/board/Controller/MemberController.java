@@ -37,10 +37,6 @@ public class MemberController {
            return new ResponseEntity<>(memberDTO, HttpStatus.CONFLICT);
        }
     }
-
-    //
-
-
     @GetMapping("/member/login")
     public String loginForm(){
         return "/memberPages/memberLogin";
@@ -63,6 +59,23 @@ public class MemberController {
         // 특정 파라미터만 삭제
         session.removeAttribute("loginEmail");
         return "redirect:/";
+    }
+    @GetMapping("/member/update")
+    public String updateFrom(HttpSession session, Model model){
+        String loginEmail=(String)session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member",memberDTO);
+        return "/memberPages/memberUpdate";
+    }
+
+    @PostMapping("/member/update")
+    public String update (@ModelAttribute MemberDTO memberDTO){
+        memberService.update(memberDTO);
+        return "/memberPages/memberMain";
+    }
+    @GetMapping("/member/myPage")
+    public String myPage (){
+        return "/memberPages/memberMain";
     }
 
 }
