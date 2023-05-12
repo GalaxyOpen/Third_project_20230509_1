@@ -33,7 +33,7 @@ public class BoardController {
     public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
-        return "/boardPages/boardPaging";
+        return "redirect:/board?id="+boardDTO.getId();
     }
     @GetMapping("/board/list")
     public String findAll(Model model){
@@ -104,7 +104,7 @@ public class BoardController {
         boardService.update(boardDTO);
         BoardDTO dto = boardService.findById(boardDTO.getId());
         model.addAttribute("board", dto);
-        return "redirect:/board/paging?id="+boardDTO.getId();
+        return "redirect:/board?id="+boardDTO.getId();
     }
     @GetMapping("/board/delete")
     public String delete(@RequestParam("id") Long id){

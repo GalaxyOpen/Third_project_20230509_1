@@ -14,5 +14,6 @@ public class CommentDTO {
     public Long id;
     public Long boardId;
     public String commentWriter;
+    public String commentContents;
     public Timestamp commentCreatedDate;
 }

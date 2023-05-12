@@ -22,7 +22,7 @@
 
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id" >
         insert into board_table(boardWriter, boardTitle, boardContents, fileAttached, memberId)
-        values (#{boardWriter},#{boardTitle},#{boardContents}, #{fileAttached}), #{memberId}
+        values (#{boardWriter},#{boardTitle},#{boardContents}, #{fileAttached}, #{memberId})
     </insert>
 
     <select id="findFile" parameterType="Long" resultType="boardFile">

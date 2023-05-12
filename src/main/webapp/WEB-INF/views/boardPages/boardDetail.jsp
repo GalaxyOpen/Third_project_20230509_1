@@ -20,10 +20,9 @@
     </style>
 </head>
 <body>
-<%--<%@include file="../component/header.jsp"%>--%>
-<%--<%@include file="../component/nav.jsp"%>--%>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 <div id="section">
-
     <table>
         <tr>
             <th>id</th>
@@ -69,9 +68,46 @@
     <button onclick="board_delete()">삭제</button>
     </c:if>
 
+        <div id="comment-area">
+            <c:if test="${sessionScope.loginEmail != null}">
+            <input type="text" id="comment-writer" placeholder="댓글 작성자 닉네임">
+            <input type="text" id="comment-contents" placeholder="댓글 내용">
+            </c:if>
+
+            <button type="button" onclick="comment_write()">댓글 작성</button>
+        </div>
+    <div id="comment-list">
+        <c:choose>
+            <c:when test="${commentList == null}">
+                <h3>작성된 댓글이 없습니다.</h3>
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>작성자</th>
+                        <th>내용</th>
+                        <th>작성시간</th>
+                    </tr>
+                    <c:forEach items="${commentList}" var="comment">
+                        <tr>
+                            <td>${comment.id}</td>
+                            <td>${comment.commentWriter}</td>
+                            <td>${comment.commentContents}</td>
+                            <td>
+                                <fmt:formatDate value="${comment.commentCreatedDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
+                            </td>
+                        </tr>
+
+                    </c:forEach>
+                </table>
+            </c:otherwise>
+        </c:choose>
+    </div>
     <a href="/">처음으로 돌아가기</a>
 
-<%--<%@include file="../component/footer.jsp"%>--%>
+</div>
+<%@include file="../component/footer.jsp"%>
 </body>
 <script>
     const board_list =()=>{
@@ -80,7 +116,6 @@
         const page = '${page}';
         location.href="/board/paging?page="+page+"&type"+type+"&q"+q;
     }
-
     const board_update=()=>{
         const id='${board.id}'; // 보드의 아이디 변수 값을 가지고 와서 요청한다.
         location.href="/board/update?id="+id;
@@ -89,6 +124,7 @@
         const id='${board.id}'; // 보드의 아이디 변수 값을 가지고 와서 요청한다.
         location.href="/board/delete-check?id="+id;
     }
+
     const comment_write=()=>{
         const commentWriter=document.getElementById("comment-writer").value;
         const commentContents = document.getElementById("comment-contents").value;
@@ -124,7 +160,7 @@
                 document.getElementById("comment-writer").value="";
                 document.getElementById("comment-contents").value="";
             },
-            error:function(com){
+            error:function(){
                 console.log("실패");
             }
         })

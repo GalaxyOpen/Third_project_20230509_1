@@ -3,9 +3,14 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="../resources/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 <div id="section">
     <h2>회원리스트</h2>
     <table>
@@ -13,9 +18,7 @@
             <th>번호</th>
             <th>이메일</th>
             <th>이름</th>
-            <th>생년월일</th>
             <th>휴대폰번호</th>
-            <th>조회</th>
             <th>삭제</th>
         </tr>
         <c:forEach items="${memberList}" var ="member">
@@ -42,11 +45,36 @@
     <div id="detail-area"></div>
     <a href="/">처음으로 돌아가기</a>
 </div>
+<%@include file="../component/footer.jsp"%>
 </body>
 <script>
     const member_delete =(id)=>{
-        location.href="/delete?id="+id;
+        location.href="/member/delete?id="+id;
 
+    }
+    const member_detail_ajax = (id) => {
+        const resultArea = document.getElementById("detail-area")
+        $.ajax({
+            type: "get",
+            url: "/member/admin",
+            data: {
+                "id": id
+            },
+            success: function(res) {
+                let result = "<table>";
+                result += "<tr>";
+                result += "<td>" + res.memberEmail + "</td>";
+                result += "<td>" + res.memberName + "</td>";
+                result += "<td>" + res.memberBirth + "</td>";
+                result += "<td>" + res.memberMobile + "</td>";
+                result += "</tr>";
+                result += "</table>";
+                resultArea.innerHTML = result;
+            },
+            error: function(){
+                alert("일치하는 정보가 없습니다")
+            }
+        })
     }
 </script>
 </html>

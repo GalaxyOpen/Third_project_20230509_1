@@ -11,8 +11,8 @@
   </style>
 </head>
 <body>
-<%--<%@include file="../component/header.jsp"%>--%>
-<%--<%@include file="../component/nav.jsp"%>--%>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 <div id="section">
   <form action="/board/list"></form>
   <h2>게시판 리스트</h2>
@@ -36,7 +36,7 @@
   </table>
 
 </div>
-<%--<%@include file="../component/footer.jsp"%>--%>
+<%@include file="../component/footer.jsp"%>
 </body>
 
 </html>

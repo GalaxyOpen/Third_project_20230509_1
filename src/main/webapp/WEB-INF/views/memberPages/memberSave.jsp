@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>Title</title>
-
+    <link rel="stylesheet" href="../resources/css/main.css">
 </head>
 <body>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 <div id="section">
     <form action="/member/save" method="post" enctype="multipart/form-data">
        Email: <input type="text" id="memberEmail" name="memberEmail" onblur="email_duplicate_check()" placeholder="아이디를 입력해주세요">
@@ -20,6 +22,7 @@
         <input type="submit" value="회원가입">
     </form>
 </div>
+<%@include file="../component/footer.jsp"%>
 </body>
     <script>
         // const email_check =()=> {

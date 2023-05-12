@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Member;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -79,4 +81,15 @@ public class MemberService {
     public void update(MemberDTO memberDTO) {
         memberRepository.update(memberDTO);
     }
+
+    public List<MemberDTO> findAll() {
+        List<MemberDTO> memberDTOList = memberRepository.findAll();
+        return memberDTOList;
+    }
+
+    public void delete(Long id) {
+        memberRepository.delete(id);
+    }
+
+
 }

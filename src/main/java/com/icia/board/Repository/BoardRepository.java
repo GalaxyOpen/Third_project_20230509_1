@@ -62,6 +62,6 @@ public class BoardRepository {
     }
 
     public void update(BoardDTO boardDTO) {
-        sql.update("board.update",boardDTO);
+        sql.update("Board.update",boardDTO);
     }
 }

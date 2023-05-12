@@ -4,10 +4,11 @@
 <html>
 <head>
     <title>Title</title>
-
+    <link rel="stylesheet" href="../resources/css/main.css">
 </head>
 <body>
-
+<%@include file="./component/header.jsp"%>
+<%@include file="./component/nav.jsp"%>
 <div id="section">
 <c:choose>
     <c:when test="${sessionScope.loginEmail == null}">
@@ -24,6 +25,7 @@
         <a href="/member/admin">회원목록</a>
     </c:if>
 </div>
+<%@include file="./component/footer.jsp"%>
 
 </body>
 </html>

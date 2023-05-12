@@ -4,8 +4,11 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="../resources/css/main.css">
 </head>
 <body>
+<%@include file="../component/header.jsp"%>
+<%@include file="../component/nav.jsp"%>
 <div id="section">
     <h2>회원 정보 수정</h2>
     <form action="/member/update" method="post" name="updateForm">
@@ -17,6 +20,7 @@
         <input type="button" onclick="update_check()" value="수정">
     </form>
 </div>
+<%@include file="../component/footer.jsp"%>
 </body>
 <script>
     const update_check = () => {
