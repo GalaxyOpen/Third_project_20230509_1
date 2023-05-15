@@ -13,4 +13,5 @@ public class MemberFileDTO {
     private String originalFileName;
     private String storedFileName;
     private Long memberId;
+    private String fileAttached;
 }

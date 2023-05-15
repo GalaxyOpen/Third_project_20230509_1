@@ -92,4 +92,12 @@ public class MemberService {
     }
 
 
+    public MemberDTO findById(Long id) {
+        MemberDTO memberDTO = memberRepository.findById(id);
+        return memberDTO;
+    }
+
+    public List<MemberFileDTO> findFile(Long id) {
+        return memberRepository.findFile(id);
+    }
 }

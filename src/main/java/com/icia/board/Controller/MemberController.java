@@ -1,6 +1,7 @@
 package com.icia.board.Controller;
 
 import com.icia.board.DTO.MemberDTO;
+import com.icia.board.DTO.MemberFileDTO;
 import com.icia.board.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -74,14 +76,12 @@ public class MemberController {
         memberService.update(memberDTO);
         return "/memberPages/memberMain";
     }
+
     @GetMapping("/member/myPage")
     public String myPage (){
         return "/memberPages/memberMain";
     }
-//    @GetMapping("/member/admin")
-//    public String admin(){
-//        return "/memberPages/memberAdmin";
-//    }
+
     @GetMapping("/member/admin")
     public String findAll(Model model){
         List<MemberDTO> memberDTOList = memberService.findAll();
@@ -89,6 +89,20 @@ public class MemberController {
         System.out.println(memberDTOList.size());
         return "/memberPages/memberAdmin";
     }
+    @GetMapping("/member/list")
+    public String findById(@RequestParam("id")Long id, Model model){
+        MemberDTO memberDTO=memberService.findById(id);
+        model.addAttribute("member",memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
+
+        if(memberDTO.getFileAttached()==1){
+            List<MemberFileDTO> memberFileDTO = memberService.findFile(memberDTO.getId());
+            model.addAttribute("memberFileList", memberFileDTO);
+            System.out.println("memberFileDTO = " + memberFileDTO);
+        }
+        return "/memberPages/memberDetail";
+    }
+
     @GetMapping("/member/delete")
     public String delete(@RequestParam("id")Long id){
         memberService.delete(id);

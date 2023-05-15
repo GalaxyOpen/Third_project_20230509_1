@@ -19,7 +19,10 @@
             <th>이메일</th>
             <th>이름</th>
             <th>휴대폰번호</th>
+
+            <th>조회</th>
             <th>삭제</th>
+
         </tr>
         <c:forEach items="${memberList}" var ="member">
             <tr>
@@ -27,18 +30,10 @@
                 <td>${member.memberEmail}</td>
                 <td>${member.memberName}</td>
                 <td>${member.memberMobile}</td>
-            <c:if test="${member.fileAttached == 1}">
-                <tr>
-                    <th>image</th>
-                    <td>
-                        <c:forEach items ="${memberFileList}" var="memberFile">
-                            <img src="${pageContext.request.contextPath}/upload/${memberFile.storedFileName}"
-                                 alt="" width="100" height="100">
-                        </c:forEach>
-                    </td>
-                </tr>
-            </c:if>
+                <c:if test="${sessionScope.loginEmail == 'admin'}">
+                <td><button onclick="member_detail('${member.id}')">조회</button></td>
                 <td><button onclick="member_delete('${member.id}')">삭제</button></td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>
@@ -48,6 +43,9 @@
 <%@include file="../component/footer.jsp"%>
 </body>
 <script>
+    const member_detail =(id)=>{
+        location.href="/member/list?id="+id;
+    }
     const member_delete =(id)=>{
         location.href="/member/delete?id="+id;
 
@@ -65,7 +63,7 @@
                 result += "<tr>";
                 result += "<td>" + res.memberEmail + "</td>";
                 result += "<td>" + res.memberName + "</td>";
-                result += "<td>" + res.memberBirth + "</td>";
+                result += "<td>" + res.memberPassword + "</td>";
                 result += "<td>" + res.memberMobile + "</td>";
                 result += "</tr>";
                 result += "</table>";

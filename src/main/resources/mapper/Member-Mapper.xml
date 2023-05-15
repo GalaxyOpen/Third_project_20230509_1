@@ -12,8 +12,11 @@
     <insert id="saveFile" parameterType="memberFile">
         insert into member_profile_table(originalFileName, storedFileName, memberId)
         values (#{originalFileName}, #{storedFileName}, #{memberId})
-
     </insert>
+
+    <select id="findFile" parameterType="Long" resultType="memberFile">
+        select*from member_profile_table where boardId=#{boardId}
+    </select>
 
     <select id="findByMemberEmail" parameterType="String" resultType="member">
         select * from member_table where memberEmail=#{memberEmail}
@@ -29,6 +32,10 @@
 
     <select id="findAll" resultType="member">
         select * from member_table
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="member">
+        select *from member_table where id=#{id}
     </select>
 
     <delete id="delete" parameterType="Long">

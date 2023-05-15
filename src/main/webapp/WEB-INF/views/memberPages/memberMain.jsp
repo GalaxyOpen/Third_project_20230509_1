@@ -11,7 +11,8 @@
 <div id="section">
     ${sessionScope.loginEmail} 님 환영해요!
 
-    <button onclick="update()">개인정보 관리하기</button><br>
+    <button onclick="update('${member.id}')">개인정보 수정하기</button><br>
+
     <a href="/board/save">글 작성하기</a><br>
     <a href="/board/paging">글 목록보기</a><br>
     <a href="/member/logout">로그아웃</a><br>
@@ -26,37 +27,9 @@
 <%@include file="../component/footer.jsp"%>
 </body>
 <script>
-    const update=()=>{
-        location.href="/member/update";
+    const update=(id)=>{
+        location.href="/member/update?id="+id;
     }
-    const member_delete =(id)=>{
-        location.href="/member/delete?id="+id;
-    }
-    const member_detail_ajax = (id) => {
-        const resultArea = document.getElementById("detail-area")
-        $.ajax({
-            type: "get",
-            url: "/detail_ajax",
-            data: {
-                "id": id
-            },
-            success: function(res) {
-                let result = "<table>";
-                result += "<tr>";
-                result += "<td>" + res.memberEmail + "</td>";
-                result += "<td>" + res.memberName + "</td>";
-                result += "<td>" + res.memberBirth + "</td>";
-                result += "<td>" + res.memberMobile + "</td>";
-                result += "</tr>";
-                result += "</table>";
-                resultArea.innerHTML = result;
-            },
-            error: function(){
-                alert("일치하는 정보가 없습니다")
-            }
-        })
-    }
+
 </script>
-
-
 </html>
