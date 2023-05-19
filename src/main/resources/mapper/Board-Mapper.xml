@@ -56,6 +56,10 @@
                                fileAttached=#{fileAttached} where id=#{id}
     </update>
 
+    <insert id="addLike">
+
+    </insert>
+
 
 
 </mapper>

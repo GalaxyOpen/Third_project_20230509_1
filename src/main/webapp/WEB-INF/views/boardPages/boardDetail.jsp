@@ -104,6 +104,13 @@
             </c:otherwise>
         </c:choose>
     </div>
+    <div id="judgementArea">
+
+            <button onclick="goodUp()"<c:if test="${sessionScope.loginEmail==null}">disabled</c:if>>좋아요</button>
+
+            <button onclick="goodDown()">좋아요 취소</button>
+
+    </div>
     <a href="/">처음으로 돌아가기</a>
 
 </div>
@@ -166,5 +173,30 @@
         })
 
     }
+    const goodUp=()=>{
+        const articleId = '${board.id}'
+
+        $.ajax({
+            type: "post",
+            url: "/goodUp",
+            data: {
+               "articleId" : articleId,
+            },
+            success:function(){
+                console.log("좋아요 성공");
+            },
+            error:function(){
+             console.log("좋아요 실패");
+            }
+    })
+    }
+    <%--const goodDown=()=>{--%>
+    <%--    const articleId = '${board.id}'--%>
+    <%--    $.ajax({--%>
+    <%--        type:"Post",--%>
+    <%--    })--%>
+
+    <%--}--%>
+
 </script>
 </html>
