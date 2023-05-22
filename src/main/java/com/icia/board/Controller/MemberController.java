@@ -48,6 +48,7 @@ public class MemberController {
     public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
         boolean loginResult = memberService.login(memberDTO);
         if(loginResult){
+            session.setAttribute("member", memberDTO.getId());
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
             return "/memberPages/memberMain";
         }else {

@@ -3,13 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Like">
-    <insert id="addLike" parameterType="Integer">
+    <insert id="addLike" parameterType="Long">
         insert into board_like (articleId, memberId)
         values (#{articleId},#{memberId})
     </insert>
 
+    <select id="findById" parameterType="long" resultType="like">
+        select*from board_like where memberId=#{memberId}
+    </select>
+
     <insert id="disLike">
-        update board_like set article_like=article_like-1 where articleId=#{articleId}
+        delete from board_like where articleId=#{articleId}
     </insert>
 
 </mapper>

@@ -174,19 +174,20 @@
 
     }
     const goodUp=()=>{
-        const articleId = '${board.id}'
-
         $.ajax({
             type: "post",
             url: "/goodUp",
             data: {
-               "articleId" : articleId,
+               "articleId" : '${board.id}',
+                "memberId" : '${sessionScope.loginEmail}'
             },
+
             success:function(){
                 console.log("좋아요 성공");
             },
             error:function(){
              console.log("좋아요 실패");
+
             }
     })
     }

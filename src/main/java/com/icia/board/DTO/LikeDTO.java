@@ -11,5 +11,4 @@ public class LikeDTO {
     private Long id;
     private Long articleId;
     private Long memberId;
-    private Long article_like;
 }

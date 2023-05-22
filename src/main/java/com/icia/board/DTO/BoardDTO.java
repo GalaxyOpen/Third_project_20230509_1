@@ -22,5 +22,6 @@ public class BoardDTO {
     public int fileAttached;
     private List<MultipartFile> boardFile;
     private Long memberId;
+    private int likes;
 
 }

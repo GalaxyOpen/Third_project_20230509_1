@@ -19,4 +19,5 @@ public class MemberDTO {
     private String memberMobile;
     private List<MultipartFile> memberProfile;
     private int fileAttached;
+    private List<Integer> likeArticles;
 }
