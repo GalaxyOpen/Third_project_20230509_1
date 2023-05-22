@@ -24,16 +24,19 @@ public class LikeController {
 
     @PostMapping("/goodUp")
     public ResponseEntity<String> addLike(@ModelAttribute Long articleId,
-                                          HttpSession session, Model model){
+                                          HttpSession session){
 
         // 1. 세션에 이메일 값을 가지고 여기서 회원의 아이디를 조회한 것을 addlike로 보내라.
         //세션에 있는걸 컨트롤러 어디서든 꺼낼 수 있다.
         String memberId = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(memberId);
 
+        System.out.println("memberDTO = " + memberDTO);
+        System.out.println("memberId = " + memberId);
+        System.out.println("articleId = " + articleId);
 
        boolean result = likeService.addLike(articleId, memberDTO.getId());
-        System.out.println("memberId = " + memberId);
+        System.out.println("result = " + result);
        if(result){
            return ResponseEntity.ok("좋아요 추가");
        }else{

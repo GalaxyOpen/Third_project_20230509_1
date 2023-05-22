@@ -15,7 +15,7 @@ public class LikeRepository {
     public boolean addLike(Long articleId, Long memberId) {
         LikeDTO likeDTO = new LikeDTO();
         likeDTO.setArticleId(articleId);
-        likeDTO.setMemberId(Long.valueOf(memberId));
+        likeDTO.setMemberId(memberId);
         sql.insert("Like.addLike", likeDTO);
         return true;
     }
