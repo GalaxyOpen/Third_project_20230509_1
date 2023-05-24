@@ -23,8 +23,9 @@ public class LikeController {
     private MemberService memberService;
 
     @PostMapping("/goodUp")
-    public ResponseEntity<String> addLike(@ModelAttribute Long articleId,
+    public ResponseEntity<String> addLike(@RequestParam("articleId") Long articleId,
                                           HttpSession session){
+        System.out.println("넘어옴");
 
         // 1. 세션에 이메일 값을 가지고 여기서 회원의 아이디를 조회한 것을 addlike로 보내라.
         //세션에 있는걸 컨트롤러 어디서든 꺼낼 수 있다.
@@ -44,13 +45,13 @@ public class LikeController {
        }
     }
 
-    @PostMapping("/goodDown")
-    public ResponseEntity<String> addDislike(@RequestParam("articleId") int articleId) {
-        try {
-            likeService.addDislike(articleId);
-            return ResponseEntity.ok("Dislike added successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add dislike");
-        }
-    }
+//    @PostMapping("/goodDown")
+//    public ResponseEntity<String> addDislike(@RequestParam("articleId") int articleId) {
+//        try {
+//            likeService.addDislike(articleId);
+//            return ResponseEntity.ok("Dislike added successfully");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add dislike");
+//        }
+//    }
 }

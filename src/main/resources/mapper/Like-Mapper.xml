@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Like">
-    <insert id="addLike" parameterType="Long">
+    <insert id="addLike" parameterType="Long" >
         insert into board_like (articleId, memberId)
         values (#{articleId},#{memberId})
     </insert>
 
-    <select id="findById" parameterType="long" resultType="like">
+    <select id="findById" parameterType="Long" resultType="like">
         select*from board_like where memberId=#{memberId}
     </select>
 
